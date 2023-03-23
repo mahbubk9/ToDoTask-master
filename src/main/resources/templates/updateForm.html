@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
 </head>
 <body>
-    <div class="container my-2">
+    <div class="container my-2 mb-3">
         <div class="d-flex justify-content-center" >
             <nav class="navbar navbar-dark bg-dark">
                 <a class="navbar-brand" href=index.html>To Do List</a>
@@ -18,18 +18,14 @@
         </div>
 
     </div>   
-    <div>
+    <div class="container justify-content-center">
 
-   
-    
-      
-    
-        <form th:action="@{/saveUpdate}" th:object="${dt}" method="post">
-            <input type="textro" name="id" th:field="$*{id}" readonly="">
-            <input type="text" name="taskDescription" th:field="$*{taskDescription}" placeholder="TaskDescription">
-            <input type="text" name="priority" th:field="$*{priority} "placeholder="Priority">
-            <input type="date" name="deadLine" th:field="$*{deadLine}"placeholder="DeadLIne YYYY/MM/DD" >
-            <input type="text" name="status" th:field="$*{status}" placeholder="Status">
+        <form class="form" th:action="@{/saveUpdate}" th:object="${dt}" method="post">
+            <input type="textro" name="id" th:value="${dt.id}" readonly="">
+            <input type="text" name="taskDescription" th:value="${dt.taskDescription}" placeholder="TaskDescription">
+            <input type="text" name="priority" th:value="${dt.priority} "placeholder="Priority">
+            <input type="date" name="deadLine" th:value="${dt.deadLine}"placeholder="DeadLIne YYYY/MM/DD" >
+            <input type="text" name="status" th:value="${dt.status}" placeholder="Status">
             <button class="btn btn-dark" type="submit">SaveUpdate</button>
     </form>
     </div>

@@ -1,5 +1,7 @@
 package com.example.todolist;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;;
@@ -68,6 +71,23 @@ public String deleteTask( Model model ,@ModelAttribute ToDo task) {
       
       return "updateForm";
   }
+
+  @RequestMapping ("/saveUpdate")
+    public String saveUpdate (Model model ,@RequestParam Integer id, @RequestParam String taskDescription, @RequestParam String priority, @RequestParam LocalDate deadLine, @RequestParam String status) {
+     
+      ToDo data=service.findTaskbyID(id);
+      data.setTaskDescription(taskDescription);
+      data.setPriority(priority);
+      data.setDeadLine(deadLine);
+      data.setStatus(status);
+      service.saveToDo(data);
+
+      return "redirect:/";
+      
+    }
+
+  }
+  
  
   
    
@@ -75,4 +95,3 @@ public String deleteTask( Model model ,@ModelAttribute ToDo task) {
 
  
   
-}

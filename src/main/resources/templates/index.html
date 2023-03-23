@@ -74,11 +74,7 @@
                    
                   <form th:action="@{/updateForm}" th:object="${ ac}" method="post">
                        <input type="hidden" name="id" th:value="${ac.id}">
-                       <input type="hidden" name="tas#" th:value="${ac.taskDescription}">
-                       <input type="hidden" name="Priority" th:value="${ac.priority}">
-                       <input type="hidden" name="DeadLIne" th:value="${ac.deadLine}">
-                       <input type="hidden" name="Status" th:value="${ac.status}">
-                       
+                      
                        <button class="btn btn-dark"type="submit">Update</button>
                   </form>
                 
