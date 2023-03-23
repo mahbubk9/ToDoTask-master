@@ -1,20 +1,15 @@
 package com.example.todolist;
 
 import java.util.List;
-import java.util.Optional;
- 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-import com.example.todolist.ToDo;;
+import org.springframework.web.bind.annotation.RequestParam;;
  
 
  
@@ -28,6 +23,32 @@ public class TodoController {
     this.service = service;
     
   }
+  @GetMapping(path="/")
+  public String index(Model model) 
+  {
+    List<ToDo> list = service.getAllToDos();
+ 
+    model.addAttribute("ToDos", list);
+    model.addAttribute("task", new ToDo());
+    return "index";
+  }
+ 
+  @RequestMapping (value="/addTask",method= RequestMethod.POST)
+  public String addTask (Model model ,@ModelAttribute ToDo task){
+      service.saveToDo(task);
+      return "redirect:/";
+
+
+  }
+
+  @RequestMapping("/deleteTask")
+public String deleteTask( Model model ,@ModelAttribute ToDo task) {
+   service.deleteTaskbyID(task.getId());
+      
+    return "redirect:/";
+}
+
+
  
   @GetMapping(path="/AllToDos")
   public String getAllToDos(Model model) 
@@ -38,14 +59,14 @@ public class TodoController {
     return "AllToDos";
   }
 
-  @PostMapping(path = "/AddToDo")
-  public String submit(@ModelAttribute("ToDos") ToDo task,  Model model) {
-    model.addAttribute("id", task.getId());
-      model.addAttribute("taskDescription", task.getTaskDescription());
-      model.addAttribute("priority", task.getPriority());
-      model.addAttribute("deadLine", task.getDeadLine());
-      model.addAttribute("status", task.getStatus());
-      return "AllToDos";
+  @RequestMapping(path = "/updateForm")
+
+  public String updateForm (Model model, @RequestParam("id") Integer id)  {
+    
+    ToDo data=service.findTaskbyID(id);
+    model.addAttribute("dt", data);
+      
+      return "updateForm";
   }
  
   

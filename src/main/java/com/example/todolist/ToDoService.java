@@ -13,7 +13,23 @@ public class ToDoService {
    
   @Autowired
   ToDoRepo todoRepo;
+
+  public ToDo saveToDo(ToDo task)
+    {
+        return todoRepo.save(task);
+    }
+ 
+  public void deleteTaskbyID(Integer id) {
+     ToDo t=todoRepo.findById(id).get();
+    todoRepo.delete(t);
+
+  }
+
+  public ToDo findTaskbyID(Integer id) {
+    return todoRepo.findById(id).get();
    
+
+ }
   public List<ToDo> getAllToDos() {
     List<ToDo> result = (List<ToDo>) todoRepo.findAll();
      

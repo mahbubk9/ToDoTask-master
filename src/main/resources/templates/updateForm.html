@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Update Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+</head>
+<body>
+    <div class="container my-2">
+        <div class="d-flex justify-content-center" >
+            <nav class="navbar navbar-dark bg-dark">
+                <a class="navbar-brand" href=index.html>To Do List</a>
+              </nav>
+              
+        </div>
+
+    </div>   
+    <div>
+
+   
+    
+      
+    
+        <form th:action="@{/saveUpdate}" th:object="${dt}" method="post">
+            <input type="textro" name="id" th:field="$*{id}" readonly="">
+            <input type="text" name="taskDescription" th:field="$*{taskDescription}" placeholder="TaskDescription">
+            <input type="text" name="priority" th:field="$*{priority} "placeholder="Priority">
+            <input type="date" name="deadLine" th:field="$*{deadLine}"placeholder="DeadLIne YYYY/MM/DD" >
+            <input type="text" name="status" th:field="$*{status}" placeholder="Status">
+            <button class="btn btn-dark" type="submit">SaveUpdate</button>
+    </form>
+    </div>
+
+
+
+    
+
+
+
+
+</body>
+</html>
